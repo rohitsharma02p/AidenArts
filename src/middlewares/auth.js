@@ -1,6 +1,7 @@
 const passport = require('passport');
 const httpStatus = require('http-status');
 const ApiError = require('../utils/ApiError');
+const config = require("../config/config");
 const { roleRights } = require('../config/roles');
 
 const verifyCallback = (req, resolve, reject, requiredRights) => async (err, user, info) => {
@@ -28,4 +29,15 @@ const auth = (...requiredRights) => async (req, res, next) => {
     .catch((err) => next(err));
 };
 
-module.exports = auth;
+
+
+
+const checkJwt = auth({
+  audience: `https://${config.auth0.domain}/api/v2/`,
+  issuerBaseURL: `https://${config.auth0.domain}/`,
+});
+
+
+
+
+module.exports = {checkJwt,auth};

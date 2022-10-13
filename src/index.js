@@ -36,3 +36,32 @@ process.on('SIGTERM', () => {
     server.close();
   }
 });
+
+const {eventService} =  require("./services")
+// eventService.fetchEvents();
+eventService.fetchTimestampEvents();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
