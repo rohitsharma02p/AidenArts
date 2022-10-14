@@ -5,7 +5,7 @@ const bcrypt = require('bcryptjs');
 const { toJSON, paginate } = require('./plugins');
 const { roles } = require('../config/roles');
 
-const eventSchema = mongoose.Schema(
+const timestampeventSchema = mongoose.Schema(
   {
     event: {
       type: String,
@@ -30,14 +30,14 @@ const eventSchema = mongoose.Schema(
 );
 
 // add plugin that converts mongoose to json
-eventSchema.plugin(toJSON);
-eventSchema.plugin(paginate);
-eventSchema.plugin(findOrCreate);
+timestampeventSchema.plugin(toJSON);
+timestampeventSchema.plugin(paginate);
+timestampeventSchema.plugin(findOrCreate);
 
 /**
  * @typedef Events
  */
-const Events = mongoose.model('Events', eventSchema);
+const TimeStampEvent = mongoose.model('TimeStampEvent', timestampeventSchema);
 
 
-module.exports = Events;
+module.exports = TimeStampEvent;

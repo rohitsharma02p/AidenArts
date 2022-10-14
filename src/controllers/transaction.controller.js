@@ -14,7 +14,21 @@ const saveTxnDetails = catchAsync(async (req, res) => {
       });
   });
 
+  
+  
+const TimestampsOfRound = catchAsync(async(req,res)=>{
+  const timestampDetails  = await transactionService.timestamps();
+  res.status(httpStatus.OK).send({message:"Transaction Timestamps Returned successfully",data:timestampDetails})
+})
+
+const firstRoundTransfer = catchAsync(async(req,res)=>{
+  const timestampDetails  = await buyTokenService.timestamps();
+  res.status(httpStatus.OK).send({message:"Transaction Timestamps Returned successfully",data:timestampDetails})
+})
+
 module.exports = {
-    saveTxnDetails
+    saveTxnDetails,
+    TimestampsOfRound,
+    firstRoundTransfer
   };
   

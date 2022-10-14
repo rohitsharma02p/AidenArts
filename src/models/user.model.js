@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
+const rbac = require("./../utils/mongoose-rbac");
 const { toJSON, paginate } = require('./plugins');
 const { roles } = require('../config/roles');
 
@@ -10,6 +11,10 @@ const userSchema = mongoose.Schema(
       type: String,
       required: true,
       trim: true,
+    },
+    auth_userid:{
+      type: String,
+      required: true
     },
     email: {
       type: String,
@@ -44,7 +49,10 @@ const userSchema = mongoose.Schema(
       type: Boolean,
       default: false,
     },
+   
+
   },
+ 
   {
     timestamps: true,
   }
@@ -53,6 +61,7 @@ const userSchema = mongoose.Schema(
 // add plugin that converts mongoose to json
 userSchema.plugin(toJSON);
 userSchema.plugin(paginate);
+userSchema.plugin(rbac.plugin);
 
 /**
  * Check if email is taken

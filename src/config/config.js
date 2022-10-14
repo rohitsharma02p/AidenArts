@@ -24,15 +24,10 @@ const envVarsSchema = Joi.object()
     SMTP_PASSWORD: Joi.string().description('password for email server'),
     EMAIL_FROM: Joi.string().description('the from field in the emails sent by the app'),
     
-    AUTH0_DOMAIN: Joi.string().description("auth0Domain"),
-    AUTH0_CLIENT_ID: Joi.string().description("auth0 client id"),
-    AUTH0_CLIENT_SECRET: Joi.string().description("auth0 client secret"),
-    AUTH0_MANAGEMENT_CLIENT_ID: Joi.string().description(
-      "auth0 management client id"
-    ),
-    AUTH0_MANAGEMENT_CLIENT_SECRET: Joi.string().description(
-      "auth0 management client secret"
-    ),
+    CLIENT_ID: Joi.string().required().description('Auth0 client Id'),
+    CLIENT_SECRET: Joi.string().required().description('Auth0 client secret'),
+    AUTH0_DOMAIN: Joi.string().required().description('Auth0 Domain'),
+    AUTH0_AUDIENCE: Joi.string().required().description('Auth0 Audience'),
   })
   .unknown();
 
@@ -73,9 +68,8 @@ module.exports = {
   },
   auth0: {
     domain: envVars.AUTH0_DOMAIN,
-    clientId: envVars.AUTH0_CLIENT_ID,
-    clientSecret: envVars.AUTH0_CLIENT_SECRET,
-    managementClientId: envVars.AUTH0_MANAGEMENT_CLIENT_ID,
-    managementClientSecret: envVars.AUTH0_MANAGEMENT_CLIENT_SECRET,
-  }
+    client_id: envVars.CLIENT_ID,
+    client_secret: envVars.CLIENT_SECRET,
+    audience: envVars.AUTH0_AUDIENCE
+  },
 };

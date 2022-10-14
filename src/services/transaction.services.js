@@ -1,7 +1,7 @@
 
 const httpStatus = require('http-status');
 const config = require('../config/config');
-const { BuyTransaction } = require('../models');
+const { BuyTransaction,TimeStampEvent } = require('../models');
 const ApiError = require('../utils/ApiError');
 
 
@@ -15,10 +15,21 @@ const ApiError = require('../utils/ApiError');
         return transaction;
       };
   
+      
+      
+const timestamps = async()=>{
+  const time_stamp = await TimeStampEvent.find({});
+  if (!time_stamp) {
+    throw new ApiError(httpStatus.NO_CONTENT, "Not TimeStamp Details");
+  }
 
+  //  console.log(timestamp)
+  return time_stamp;
+}
 
 
 
   module.exports = {
     savetransactionDetails,
+    timestamps
   };
